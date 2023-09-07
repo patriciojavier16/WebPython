@@ -53,11 +53,17 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
-                        <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                        <a href="{% url 'products' %}" class="nav-item nav-link">Products</a>
-                        <a href="{% url 'store' %}" class="nav-item nav-link">Store</a>
-                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                        <a href="{% url 'home' %}" class="nav-item {% if request.path == '/' %} active {% endif %} nav-link">Home</a>
+                        <a href="{% url 'about' %}" class="nav-item {% if request.path == '/about/' %} active {% endif %} nav-link">About</a>
+                        <a href="{% url 'products' %}" class="nav-item {% if request.path == '/products/' %} active {% endif %} nav-link">Products</a>
+                        <a href="{% url 'store' %}" class="nav-item {% if request.path == '/store/' %} active {% endif %} nav-link">Store</a>
+                        <a href="{% url 'contact' %}" class="nav-item {% if request.path == '/contact/' %} active {% endif %} nav-link">Contact</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu bg-light rounded-0 m-0">
+                                <a href="{% url 'testimonial' %}" class="dropdown-item {% if request.path == '/testimonial/' %} active {% endif %}">Testimonial</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="border-start ps-4 d-none d-lg-block">
                         <button type="button" class="btn btn-sm p-0"><i class="fa fa-search"></i></button>
@@ -83,10 +89,18 @@
                     <p class="mb-2"><i class="fa fa-phone-alt text-primary me-3"></i>+012 345 67890</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary me-3"></i>info@example.com</p>
                     <div class="d-flex pt-3">
-                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                        {% if URL_TWITTER %}
+                            <a class="btn btn-square btn-primary rounded-circle me-2" href="{{URL_TWITTER}}"><i class="fab fa-twitter"></i></a>
+                        {% endif %}
+                        {% if URL_FACEBOOK %}
+                            <a class="btn btn-square btn-primary rounded-circle me-2" href="{{URL_FACEBOOK}}"><i class="fab fa-facebook-f"></i></a>
+                        {% endif %}
+                        {% if URL_YT %}
+                            <a class="btn btn-square btn-primary rounded-circle me-2" href="{{URL_YT}}"><i class="fab fa-youtube"></i></a>
+                        {% endif %}
+                        {% if URL_INSTAGRAM %}
+                            <a class="btn btn-square btn-primary rounded-circle me-2" href="{{URL_INSTAGRAM}}"><i class="fab fa-linkedin-in"></i></a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
